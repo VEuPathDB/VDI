@@ -42,9 +42,23 @@ metadata to the database should be handled on the other side of the Kafka topic?
 
 image::assets/vdi-user-action-update.svg[]
 
+. Client submits ``PATCH`` request with updates to the dataset's metadata.
+. REST Service sanity checks the dataset metadata.
+. REST Service updates the metadata in the Cache DB
+. REST Service ``PUT``s the updated metadata into the VDI Bucket (MinIO)
+. MinIO emits an event for the ``PUT`` to the appropriate Kafka topic
+
 ==== Delete Dataset
 
 image::assets/vdi-user-action-delete.svg[]
+
+. Client submits ``DELETE`` request to the target dataset.
+. REST service validates that the requesting user owns the target dataset.
+. REST service updates the dataset record in the Cache DB, marking it as
+  "deleted"
+. REST service ``PUT``s a delete marker flag in the dataset "directory" in the
+  VDI Bucket (MinIO).
+. MinIO emits an event for the ``PUT`` to the appropriate Kafka topic.
 
 ==== Offer Dataset Share
 
