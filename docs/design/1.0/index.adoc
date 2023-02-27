@@ -1,0 +1,20 @@
+= VDI Design
+:toc: left
+
+== Components
+
+image::assets/vdi-components.svg[]
+
+== Workflow
+
+=== User Actions
+
+==== Create Dataset
+
+image::assets/vdi-user-action-create.svg[]
+
+1.
+
+==== Update Dataset Metadata
+
+image::assets/vdi-user-action-update.svg[]
