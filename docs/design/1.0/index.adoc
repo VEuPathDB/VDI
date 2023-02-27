@@ -109,6 +109,38 @@ image::assets/vdi-internal-action-import.svg[]
 
 ==== MinIO
 
+link:https://min.io/[MinIO] is an link:https://aws.amazon.com/s3/[Amazon S3]
+compatible object store that can be hosted and managed on-site.
+
+VDI uses a single bucket (object container) with object keys structured as if
+they were filesystem paths to the target objects.  With these key/paths we
+create conceptual "directories" to "contain" the dataset files.
+
+The structure of the paths is as follows:
+
+[source, directory-tree]
+----
+bucket/
+  |- {owner-user-id}/
+  |    |- {dataset-id}/
+  |    |    |- data/
+  |    |    |    |- some-data-file-1.tsv
+  |    |    |    |- some-data-file-2.tsv
+  |    |    |- shares/
+  |    |    |    |- {recipient-user-id}/
+  |    |    |    |    |- offer.json
+  |    |    |    |    |- receipt.json
+  |    |    |- upload/
+  |    |    |    |- uploaded-dataset-file-1.png
+  |    |    |    |- uploaded-dataset-file-2.xml
+  |    |    |- delete-flag
+  |    |    |- manifest.json
+  |    |    |- meta.json
+----
+
+With this structure it is easy to reason about and crawl the contents of the
+VDI bucket
+
 ==== Apache Kafka
 
 ==== Oracle Account DB
