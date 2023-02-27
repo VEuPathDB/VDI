@@ -48,9 +48,26 @@ image::assets/vdi-user-action-delete.svg[]
 
 ==== Offer Dataset Share
 
+image::assets/vdi-user-action-share-offer.svg[]
+
+. REST Service validates target user exists.
+. REST service creates share record in Cache DB
+. REST service puts share objects into MinIO
+.. Share Offer File
+.. Share Receipt File
+. MinIO emits events for the ``PUT`` to the appropriate Kafka topic
+
 ==== Revoke Dataset Share Offer
 
+image::assets/vdi-user-action-share-revoke.svg[]
+
+==== Accept Dataset Share Offer
+
+image::assets/vdi-user-action-share-accept.svg[]
+
 ==== Reject Dataset Share Offer
+
+image::assets/vdi-user-action-share-reject.svg[]
 
 ==== Reconciliation
 
