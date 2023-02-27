@@ -79,6 +79,8 @@ image::assets/vdi-user-action-share-reject.svg[]
 
 ==== Import Dataset
 
+image::assets/vdi-internal-action-import.svg[]
+
 ==== Install Dataset
 
 ==== Update Dataset Metadata
