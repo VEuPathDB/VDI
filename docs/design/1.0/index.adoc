@@ -10,7 +10,11 @@ image::assets/vdi-components.svg[]
 
 image::assets/vdi-overall-flow.svg[]
 
-=== User Actions
+=== REST API Actions
+
+==== List Datasets for User
+
+==== Lookup Dataset
 
 ==== Create Dataset
 
@@ -41,6 +45,18 @@ image::assets/vdi-user-action-update.svg[]
 ==== Delete Dataset
 
 image::assets/vdi-user-action-delete.svg[]
+
+==== Offer Dataset Share
+
+==== Revoke Dataset Share Offer
+
+==== Reject Dataset Share Offer
+
+==== Reconciliation
+
+==== Failed Dataset Install Cleanup
+
+==== Deleted Dataset Cleanup
 
 === Internal Actions
 
