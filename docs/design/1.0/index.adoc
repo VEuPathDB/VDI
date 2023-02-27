@@ -1,4 +1,5 @@
 = VDI Design
+:icons: font
 :toc: left
 
 == Components
@@ -7,14 +8,68 @@ image::assets/vdi-components.svg[]
 
 == Workflow
 
+image::assets/vdi-overall-flow.svg[]
+
 === User Actions
 
 ==== Create Dataset
 
 image::assets/vdi-user-action-create.svg[]
 
-1.
+. Client ``POST``s a dataset and accompanying metadata to the VDI REST API.
+. REST Service sanity-checks the dataset metadata.
+. REST Service generates a VDI ID for the dataset.
+. REST Service writes records into the cache DB for the dataset.
+** dataset details
+** dataset metadata
+** dataset import status
+** dataset project links
+. REST service ``PUT``s the dataset data into the VDI MinIO bucket.
+. MinIO emits an event for the ``PUT`` to the appropriate Kafka topic.
+
+[IMPORTANT]
+--
+Seems like the REST service is doing too much in this case.  Perhaps the REST
+service should simply transfer data to the MinIO bucket and the writing of
+metadata to the database should be handled on the other side of the Kafka topic?
+--
 
 ==== Update Dataset Metadata
 
 image::assets/vdi-user-action-update.svg[]
+
+==== Delete Dataset
+
+image::assets/vdi-user-action-delete.svg[]
+
+=== Internal Actions
+
+==== Import Dataset
+
+==== Install Dataset
+
+==== Update Dataset Metadata
+
+==== Soft Delete Dataset
+
+==== Hard Delete Dataset
+
+== Resources
+
+=== Global Resources
+
+==== MinIO
+
+==== Apache Kafka
+
+==== Oracle Account DB
+
+==== Oracle User DB(s)
+
+==== Oracle Application DBs
+
+=== Project Resources
+
+==== Cache DB
+
+===== Schema
