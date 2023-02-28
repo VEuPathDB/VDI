@@ -109,9 +109,6 @@ image::assets/vdi-internal-action-import.svg[]
 
 ==== MinIO
 
-link:https://min.io/[MinIO] is an link:https://aws.amazon.com/s3/[Amazon S3]
-compatible object store that can be hosted and managed on-site.
-
 VDI uses a single bucket (object container) with object keys structured as if
 they were filesystem paths to the target objects.  With these key/paths we
 create conceptual "directories" to "contain" the dataset files.
@@ -141,7 +138,12 @@ bucket/
 With this structure it is easy to reason about and crawl the contents of the
 VDI bucket
 
-==== Apache Kafka
+==== Rabbit MQ
+
+VDI uses RabbitMQ to listen for event messages coming from <<MinIO>> that
+represent object creations and deletions within the VDI MinIO bucket.  Every
+time an object is put into the bucket or deleted from the bucket an event
+message is sent through RabbitMQ.
 
 ==== Oracle Account DB
 
@@ -150,6 +152,8 @@ VDI bucket
 ==== Oracle Application DBs
 
 === Project Resources
+
+==== Apache Kafka
 
 ==== Cache DB
 
