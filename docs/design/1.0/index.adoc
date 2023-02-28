@@ -157,4 +157,98 @@ message is sent through RabbitMQ.
 
 ==== Cache DB
 
-===== Schema
+== Database Schemata
+
+=== Internal Cache DB
+
+==== `vdi.datasets`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column       | Type      | Comment
+| dataset_id   | CHAR(32)  |
+| type_name    | VARCHAR   | Name of the dataset type.
+| type_version | VARCHAR   | Version for the dataset type.
+| owner_id     | VARCHAR   | User ID of the owner of the dataset.  WDK user IDs will be `long` values.
+| is_deleted   | BOOLEAN   | Soft delete marker.
+| created      | TIMESTAMP |
+|===
+
+
+==== `vdi.dataset_files`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column     | Type     | Comment
+| dataset_id | CHAR(32) |
+| file_name  | VARCHAR  |
+|===
+
+
+==== `vdi.dataset_projects`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column     | Type     | Comment
+| dataset_id | CHAR(32) |
+| project_id | VARCHAR  |
+|===
+
+
+==== `vdi.dataset_metadata`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column      | Type     | Comment
+| dataset_id  | CHAR(32) |
+| name        | VARCHAR  | Name of the dataset.
+| summary     | VARCHAR  | Optional summary for the dataset.
+| description | VARCHAR  | Optional description of the dataset.
+|===
+
+
+==== `vdi.sync_control`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column             | Type      | Comment
+| dataset_id         | CHAR(32)  |
+| shares_update_time | TIMESTAMP | Timestamp of the most recent share file across all shares.
+| data_update_time   | TIMESTAMP | Timestamp of the most recent data file
+| meta_update_time   | TIMESTAMP | Timestamp of the meta file
+|===
+
+
+==== `vdi.dataset_share_offers`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column             | Type      | Comment
+| dataset_id         | CHAR(32)  |
+| recipient_id       | VARCHAR   | ID of the recipient of the share offer.
+| status             | VARCHAR   | `"grant" \| "revoke"`
+|===
+
+
+==== `vdi.dataset_share_receipts`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column             | Type      | Comment
+| dataset_id         | CHAR(32)  |
+| recipient_id       | VARCHAR   | ID of the recipient of the share offer.
+| status             | VARCHAR   | `"accept" \| "reject"`
+|===
+
+
+==== `vdi.import_control`
+
+[%header, cols="3m,1m,6"]
+|===
+| Column             | Type      | Comment
+| dataset_id         | CHAR(32)  |
+| status             | VARCHAR   | `"awaiting_import" \| "importing" \| "imported" \| "failed"`
+|===
+
+
+=== Application DBs
