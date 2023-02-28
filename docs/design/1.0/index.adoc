@@ -14,7 +14,11 @@ image::assets/vdi-overall-flow.svg[]
 
 ==== List Datasets for User
 
+image::assets/vdi-user-action-list-datasets.svg[]
+
 ==== Lookup Dataset
+
+image::assets/vdi-user-action-get-datasets.svg[]
 
 ==== Create Dataset
 
