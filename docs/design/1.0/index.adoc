@@ -266,33 +266,31 @@ message is sent through RabbitMQ.
 
 === Global RabbitMQ
 
-`vdi-bucket-notifications`::
---
---
+==== `vdi-bucket-notifications`
 
 === Stack-Internal Kafka
 
-`vdi-import-triggers`::
+==== `vdi-import-triggers`
 
-`vdi-import-results`::
+==== `vdi-import-results`
 
-`vdi-install-triggers`::
+==== `vdi-install-triggers`
 
-`vdi-install-results`::
+==== `vdi-install-results`
 
-`vdi-install-meta-triggers`::
+==== `vdi-install-meta-triggers`
 
-`vdi-install-meta-results`::
+==== `vdi-install-meta-results`
 
-`vdi-soft-delete-triggers`::
+==== `vdi-soft-delete-triggers`
 
-`vdi-soft-delete-results`::
+==== `vdi-soft-delete-results`
 
-`vdi-hard-delete-triggers`::
+==== `vdi-hard-delete-triggers`
 
-`vdi-hard-delete-results`::
+==== `vdi-hard-delete-results`
 
-`vdi-share-triggers`::
+==== `vdi-share-triggers`
 
-`vdi-share-results`::
+==== `vdi-share-results`
 
