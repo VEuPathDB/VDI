@@ -21,6 +21,8 @@ image::assets/vdi-overall-flow.svg[]
 
 image::assets/vdi-user-action-list-datasets.svg[]
 
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets:get[API Docs]
+
 . Client makes a `GET` request to the dataset list endpoint.
 . REST service queries the Cache DB for datasets belonging to or shared with the
   requesting user (by WDK user ID)
@@ -30,9 +32,13 @@ image::assets/vdi-user-action-list-datasets.svg[]
 
 image::assets/vdi-user-action-get-datasets.svg[]
 
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets/\{vd-id}:get[API Docs]
+
 ==== Create Dataset
 
 image::assets/vdi-user-action-create.svg[]
+
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets:post[API Docs]
 
 . Client ``POST``s a dataset and accompanying metadata to the VDI REST API.
 . REST Service sanity-checks the dataset metadata.
@@ -49,6 +55,8 @@ image::assets/vdi-user-action-create.svg[]
 
 image::assets/vdi-user-action-update.svg[]
 
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets/\{vd-id}:patch[API Docs]
+
 . Client submits ``PATCH`` request with updates to the dataset's metadata.
 . REST Service sanity checks the dataset metadata.
 . REST Service updates the metadata in the Cache DB
@@ -58,6 +66,8 @@ image::assets/vdi-user-action-update.svg[]
 ==== Delete Dataset
 
 image::assets/vdi-user-action-delete.svg[]
+
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets/\{vd-id}:delete[API Docs]
 
 . Client submits ``DELETE`` request to the target dataset.
 . REST service validates that the requesting user owns the target dataset.
