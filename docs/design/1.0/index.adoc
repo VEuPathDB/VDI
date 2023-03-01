@@ -6,6 +6,11 @@
 
 image::assets/vdi-components.svg[]
 
+.Legend
+--
+image::assets/vdi-legend.svg[]
+--
+
 == Workflow
 
 image::assets/vdi-overall-flow.svg[]
