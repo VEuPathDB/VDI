@@ -266,9 +266,141 @@ message is sent through RabbitMQ.
 
 ==== `vdi-bucket-notifications`
 
+The `vdi-bucket-notifications` RabbitMQ queue is fed by events coming directly
+from <<MinIO>> for every object that is put into the target VDI bucket or
+deleted from the target VDI bucket.
+
+.Example Object Put Event Body
+[source, json]
+----
+{
+  "EventName": "s3:ObjectCreated:Put",
+  "Key": "some-other-bucket/minio.png",
+  "Records": [
+    {
+      "eventVersion": "2.0",
+      "eventSource": "minio:s3",
+      "awsRegion": "",
+      "eventTime": "2023-02-28T12:46:17.934Z",
+      "eventName": "s3:ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "someToken"
+      },
+      "requestParameters": {
+        "principalId": "someToken",
+        "region": "",
+        "sourceIPAddress": "127.0.0.1"
+      },
+      "responseElements": {
+        "content-length": "0",
+        "x-amz-request-id": "1747FDBDD1E65B89",
+        "x-minio-deployment-id": "f143f7ea-b0c8-4c67-bd9d-452d1ec89cca",
+        "x-minio-origin-endpoint": "http://172.24.0.5:9000"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "Config",
+        "bucket": {
+          "name": "some-other-bucket",
+          "ownerIdentity": {
+            "principalId": "someToken"
+          },
+          "arn": "arn:aws:s3:::some-other-bucket"
+        },
+        "object": {
+          "key": "minio.png",
+          "size": 8114,
+          "eTag": "ac052a420b148a7c055767538445f544",
+          "contentType": "image/png",
+          "userMetadata": {
+            "content-type": "image/png"
+          },
+          "sequencer": "1747FDBDD219CAE5"
+        }
+      },
+      "source": {
+        "host": "127.0.0.1",
+        "port": "",
+        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.47 MinIO Console/(dev)"
+      }
+    }
+  ]
+}
+----
+
+.Example Object Delete Event Body
+[source, json]
+----
+{
+  "EventName": "s3:ObjectRemoved:Delete",
+  "Key": "some-other-bucket/minio.png",
+  "Records": [
+    {
+      "eventVersion": "2.0",
+      "eventSource": "minio:s3",
+      "awsRegion": "",
+      "eventTime": "2023-02-28T12:53:38.154Z",
+      "eventName": "s3:ObjectRemoved:Delete",
+      "userIdentity": {
+        "principalId": "someToken"
+      },
+      "requestParameters": {
+        "principalId": "someToken",
+        "region": "",
+        "sourceIPAddress": "127.0.0.1"
+      },
+      "responseElements": {
+        "content-length": "155",
+        "x-amz-request-id": "1747FE245132AF61",
+        "x-minio-deployment-id": "f143f7ea-b0c8-4c67-bd9d-452d1ec89cca",
+        "x-minio-origin-endpoint": "http://172.24.0.5:9000"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "Config",
+        "bucket": {
+          "name": "some-other-bucket",
+          "ownerIdentity": {
+            "principalId": "someToken"
+          },
+          "arn": "arn:aws:s3:::some-other-bucket"
+        },
+        "object": {
+          "key": "minio.png",
+          "sequencer": "1747FE2451444D88"
+        }
+      },
+      "source": {
+        "host": "127.0.0.1",
+        "port": "",
+        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.47 MinIO Console/(dev)"
+      }
+    }
+  ]
+}
+----
+
 === Stack-Internal Kafka
 
 ==== `vdi-import-triggers`
+
+.Message Body Schema
+[source, protobuf]
+----
+message ImportTrigger {
+  required string datasetID = 1;
+  required string userID = 2;
+}
+----
+
+.Example Message Body
+[source, json]
+----
+{
+  "datasetID": "bd77e09020a76cb244647ffaa2458bed",
+  "userID": "123456789"
+}
+----
 
 ==== `vdi-import-results`
 
@@ -278,9 +410,45 @@ message is sent through RabbitMQ.
 
 ==== `vdi-install-meta-triggers`
 
+.Message Body Schema
+[source, protobuf]
+----
+message InstallMetaTrigger {
+  required string datasetID = 1;
+  required string userID = 2;
+}
+----
+
+.Example Message Body
+[source, json]
+----
+{
+  "datasetID": "bd77e09020a76cb244647ffaa2458bed",
+  "userID": "123456789"
+}
+----
+
 ==== `vdi-install-meta-results`
 
 ==== `vdi-soft-delete-triggers`
+
+.Message Body Schema
+[source, protobuf]
+----
+message SoftDeleteTrigger {
+  required string datasetID = 1;
+  required string userID = 2;
+}
+----
+
+.Example Message Body
+[source, json]
+----
+{
+  "datasetID": "bd77e09020a76cb244647ffaa2458bed",
+  "userID": "123456789"
+}
+----
 
 ==== `vdi-soft-delete-results`
 
