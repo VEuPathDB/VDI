@@ -16,6 +16,11 @@ image::assets/vdi-overall-flow.svg[]
 
 image::assets/vdi-user-action-list-datasets.svg[]
 
+. Client makes a `GET` request to the dataset list endpoint.
+. REST service queries the Cache DB for datasets belonging to or shared with the
+  requesting user (by WDK user ID)
+. REST service returns the list to the client.
+
 ==== Lookup Dataset
 
 image::assets/vdi-user-action-get-datasets.svg[]
@@ -256,3 +261,38 @@ message is sent through RabbitMQ.
 
 
 === Application DBs
+
+== Message Queues & Topics
+
+=== Global RabbitMQ
+
+`vdi-bucket-notifications`::
+--
+--
+
+=== Stack-Internal Kafka
+
+`vdi-import-triggers`::
+
+`vdi-import-results`::
+
+`vdi-install-triggers`::
+
+`vdi-install-results`::
+
+`vdi-install-meta-triggers`::
+
+`vdi-install-meta-results`::
+
+`vdi-soft-delete-triggers`::
+
+`vdi-soft-delete-results`::
+
+`vdi-hard-delete-triggers`::
+
+`vdi-hard-delete-results`::
+
+`vdi-share-triggers`::
+
+`vdi-share-results`::
+
