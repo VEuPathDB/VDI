@@ -75,22 +75,31 @@ link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-dataset
   "deleted"
 . REST service ``PUT``s a delete marker flag in the dataset "directory" in the
   VDI Bucket (MinIO).
-. MinIO emits an event for the ``PUT`` to the appropriate Kafka topic.
+. MinIO emits an event for the object `PUT` to the global RabbitMQ.
 
 ==== Offer Dataset Share
 
 image::assets/vdi-user-action-share-offer.svg[]
 
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets/\{vd-id}/shares/\{recipient-user-id}/offer:put[API Docs]
+
+. Client makes a `PUT` request with the share action `"grant"`.
 . REST Service validates target user exists.
-. REST service creates share record in Cache DB
-. REST service puts share objects into MinIO
-.. Share Offer File
-.. Share Receipt File
-. MinIO emits events for the ``PUT`` to the appropriate Kafka topic
+. REST Service updates or inserts the target share record in the Cache DB.
+. REST Service ``PUT``s a new share offer object into MinIO.
+. MinIO emits an event for the object `PUT` to the global RabbitMQ.
 
 ==== Revoke Dataset Share Offer
 
 image::assets/vdi-user-action-share-revoke.svg[]
+
+link:https://veupathdb.github.io/vdi-service/vdi-api.html#resources:/vdi-datasets/\{vd-id}/shares/\{recipient-user-id}/offer:put[API Docs]
+
+. Client makes `PUT` request with the share action `"revoke"`.
+. REST Service validates target user exists.
+. REST Service updates or inserts the target share record in the Cache DB.
+. REST Service ``PUT``s a new share offer object into MinIO
+. MinIO emits an event for the object `PUT` to the global RabbitMQ.
 
 ==== Accept Dataset Share Offer
 
